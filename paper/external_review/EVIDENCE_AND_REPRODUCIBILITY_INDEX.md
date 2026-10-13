@@ -4,7 +4,7 @@
 | --- | --- |
 | Frozen interpretation | `paper/P4_DEVELOPMENT_EVIDENCE_FREEZE.md` |
 | Supported and excluded claims | `paper/P4_SUPPORTED_CLAIMS_MATRIX.md` |
-| Provider-audited two-arm witness | `results/p4/two-arm-fault-exposure-v1/scripted_retry_lost_ack_reconciliation.json` |
+| Provider-audited two-arm witness | Historical raw audit is excluded; reproduce fresh evidence with `paper/release_candidate/REPRODUCIBILITY_GUIDE.md` and assess it using `paper/release_candidate/EXPECTED_RESULTS.md` |
 | Shared fault script | `experiments/p4/shared_fault_script_v1.json` |
 | Witness reproduction | `P4_SHARED_FAULT_EXPOSURE_REPRODUCIBILITY.md` |
 | Formal safety model | `P4_C2_FORMAL_SAFETY_SPECIFICATION.md` |
@@ -15,3 +15,5 @@
 
 All P4 execution observations are development-only. Historical P3 artifacts
 remain separate and must never be pooled with future confirmatory data.
+Excluded historical P4 evidence is likewise unavailable for independent
+reproduction from this snapshot.

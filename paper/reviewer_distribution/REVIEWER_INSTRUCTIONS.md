@@ -11,8 +11,8 @@ confirmatory experiment, a sealed benchmark, or a claim of superiority.
 After the release owner makes the reviewer branch accessible, run:
 
 ```bash
-git clone https://github.com/jeshwinwilliam/EffectGuard.git
-cd EffectGuard
+git clone https://github.com/jeshwinwilliam/effectguard-research-artifact.git
+cd effectguard-research-artifact
 git checkout p4-reviewer-artifact-v0.1
 git status --short
 ```

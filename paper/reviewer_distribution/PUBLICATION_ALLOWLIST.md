@@ -25,7 +25,7 @@ P4 development witness without the historical P3 experiment archive.
 
 ## Excluded
 
-- All `results/p3/` campaign records, manifests, traces, tables, figures, and
+- Excluded: all `results/p3/` campaign records, manifests, traces, tables, figures, and
   processed outputs.
 - Raw P4 provider databases, service logs, uncommitted evidence directories, and
   sealed benchmark truth.

@@ -20,19 +20,21 @@ uncommitted. Historical P3 directories remain untracked and unchanged.
 
 ## Completed Development Evidence
 
-- P4 deterministic development pilots: `results/p4/development-pilot-v1/` and
-  `results/p4/development-pilot-v2-fair-baselines/`.
-- Service-backed Temporal feasibility: `results/p4/sprint3e-service-backed-temporal-v1/`.
-- Common-metric reconciliation: `results/p4/common-metrics-evidence-repair-v1/`.
-- Root-compensation parity: `results/p4/root-compensation-parity-v1/`.
-- Two-arm provider-script witness: `results/p4/two-arm-fault-exposure-v1/`.
+The original development repository contains records for deterministic pilots,
+service-backed Temporal feasibility, common-metric reconciliation,
+root-compensation parity, and a two-arm provider-script witness. Those raw
+historical directories are intentionally excluded from this reviewer snapshot.
+They are not independently reproducible here; see
+`paper/reviewer_distribution/EXCLUDED_EVIDENCE_NOTICE.md`.
 
 The final witness used separate fresh local providers loaded with the same
 versioned script. Both arms produced a provider audit with a retryable failure
 before commitment, a committed effect with withheld acknowledgement, receipt
 resolution, and verification. Both reached `RECOVERED` with one retry, two
 provider submissions, two verifications, and one actual descendant effect.
-This is one development witness, not a representative benchmark result.
+This is one development witness, not a representative benchmark result. This
+artifact retains the source and instructions to regenerate the witness with
+fresh local services, not the original raw evidence directory.
 
 ## Fault-Family Status
 

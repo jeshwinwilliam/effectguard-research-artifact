@@ -40,8 +40,10 @@ Both provider audits contained `submit_failed_before_commit`, `effect_committed`
 `acknowledgement_withheld`, and `receipt_resolved`. Both arms reached
 `RECOVERED`, with one retry, two provider submissions, two provider
 verifications, and one actual descendant effect. Temporal separately recorded
-two scheduler/replay events. The evidence is
-`results/p4/two-arm-fault-exposure-v1/scripted_retry_lost_ack_reconciliation.json`.
+two scheduler/replay events. The original raw reconciliation trace is excluded
+from this history-isolated reviewer artifact. Reviewers can generate fresh
+provider audit evidence using `paper/release_candidate/REPRODUCIBILITY_GUIDE.md`
+and compare it against `paper/release_candidate/EXPECTED_RESULTS.md`.
 
 ## Remaining Integration Gaps
 

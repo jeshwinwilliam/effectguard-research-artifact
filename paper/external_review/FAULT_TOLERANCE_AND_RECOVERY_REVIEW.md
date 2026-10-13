@@ -10,8 +10,10 @@ limits of the current provider-audited two-arm Temporal witness.
 - `P4_DURABLE_EFFECT_ADAPTER.md`
 - `P4_SHARED_FAULT_EXPOSURE_REPORT.md`
 - `P4_SHARED_FAULT_EXPOSURE_FAIRNESS_MATRIX.md`
-- `P4_TWO_ARM_FAULT_EXPOSURE_REPRODUCIBILITY.md` if present, otherwise `P4_SHARED_FAULT_EXPOSURE_REPRODUCIBILITY.md`
-- `results/p4/two-arm-fault-exposure-v1/scripted_retry_lost_ack_reconciliation.json`
+- `P4_SHARED_FAULT_EXPOSURE_REPRODUCIBILITY.md`
+- `paper/release_candidate/REPRODUCIBILITY_GUIDE.md`
+- `paper/release_candidate/EXPECTED_RESULTS.md`
+- `paper/reviewer_distribution/EXCLUDED_EVIDENCE_NOTICE.md`
 
 ## Questions
 
@@ -25,7 +27,9 @@ limits of the current provider-audited two-arm Temporal witness.
 
 Follow `P4_SHARED_FAULT_EXPOSURE_REPRODUCIBILITY.md`. Return a memo identifying
 unjustified inference, missing fault cases, and any unsafe retry/compensation
-condition.
+condition. The historical raw reconciliation trace is excluded; reviewers should
+base feedback on fresh local audit evidence or explicitly identify unavailable
+historical evidence as a limitation.
 
 ## Feedback Template
 

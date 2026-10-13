@@ -21,10 +21,10 @@ for physical attempts and receipt transitions. Temporal may additionally report
 native scheduling or replay events. Do not require equal internal scheduler
 traces or infer safety beyond this witness.
 
-Compare fresh output structurally with
-`results/p4/two-arm-fault-exposure-v1/scripted_retry_lost_ack_reconciliation.json`.
-Reviewers should record any differences, including baseline wins, failures,
-or unresolved outcomes rather than normalizing them away.
+The original raw reconciliation is excluded from this history-isolated snapshot.
+Compare fresh output with the explicit contract in this file and record any
+differences, including baseline wins, failures, or unresolved outcomes rather
+than normalizing them away.
 
 The same metrics were observed in the final clean-clone verification. Its
 compact, machine-readable evidence is

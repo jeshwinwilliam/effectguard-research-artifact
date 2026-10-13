@@ -22,7 +22,7 @@ independent review and future design completion; it does not authorize a run.
 | Positive and negative controls | PARTIAL | P4 S9 counterexamples and development controls | Curator includes required controls and at least one strong-baseline tie/win. |
 | Statistical design | PARTIAL | `P4_STATISTICAL_PROTOCOL_REVIEW.md`, this checklist | Statistician approves template-level estimand, sensitivity, multiplicity, missing-data, and stopping rules. |
 | Reproducible artifact pipeline | PARTIAL | P3 raw/manifests/reports and P4 development artifacts | Add one-command sealed-study analysis, environment pinning, checksums, and expected output verification. |
-| SIGSOFT audit closure | PARTIAL | `paper/ACM_SIGSOFT_STANDARDS_AUDIT.md` identifies relevant gaps | Update the audit after citations and close independent-validation, calibration, fairness, and benchmark gaps. |
+| SIGSOFT audit closure | PARTIAL | The historical SIGSOFT audit is excluded from this reviewer snapshot; the included external-review packages preserve the unresolved categories | Recreate or independently review the standards audit after citations and close independent-validation, calibration, fairness, and benchmark gaps. |
 | Confirmatory protocol freeze | BLOCKED | Publication decision explicitly defers freeze | Resolve all external signoffs and blocked requirements; then produce a new versioned freeze decision. |
 
 ## Summary
