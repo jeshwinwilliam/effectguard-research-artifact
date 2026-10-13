@@ -32,3 +32,15 @@ The witness exercises a scripted retry/lost-acknowledgement case. It is not a
 held-out benchmark and does not validate the unimplemented restart and deadline
 families. Reviewers should compare actual provider audit evidence and evaluator
 outcomes, not terminal status alone.
+
+## Fresh verification record
+
+A clean local clone of the orphan branch passed the three focused Python test
+modules (20 tests). The default Java suite passed four unit tests and skipped
+five service-dependent tests before services were started. With fresh local
+Temporal and provider services, the explicit service-backed tests passed and the
+paired witness reported `RECOVERED` for both arms, matching graph hashes, four
+logical recovery actions, two provider submissions, two verifications, one
+retry, one materialized descendant effect, and valid independent evaluator
+verdicts. The provider audit hashes are recorded only in the local verification
+run; raw traces are intentionally not committed to this reviewer snapshot.

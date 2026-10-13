@@ -2,11 +2,10 @@
 
 ## Supported target
 
-Reproduce only the development witness described in
-`results/p4/two-arm-fault-exposure-v1/scripted_retry_lost_ack_reconciliation.json`.
-Use the reviewed runtime-source commit
-`b72be6e7fa7cdb9620a25d61323e2bc61085f0dd` or a later commit that preserves
-the manifest artifacts and claim boundaries.
+Reproduce only the development-only two-arm scripted retry and
+lost-acknowledgement witness. This history-isolated branch deliberately omits
+the historical raw reconciliation trace; a reviewer generates fresh provider
+audit evidence during the procedure below.
 
 ## Requirements
 
@@ -61,10 +60,11 @@ PYTHONPATH=. .venv/bin/python -m effectguard.p4.common_execution \
   --output "${TMPDIR:-/tmp}/effectguard-review-witness.json"
 ```
 
-Inspect the providers' `GET /audit` endpoints and compare the output with the
-committed reconciliation artifact. Stop the Temporal server and both providers
-afterward. Typical runtime is under five minutes on a laptop; reserve roughly
-2 GB RAM for the JVM, Temporal service, and two provider processes.
+Inspect the providers' `GET /audit` endpoints and compare the physical attempts,
+receipt transitions, and evaluator outcome against `EXPECTED_RESULTS.md`. Stop
+the Temporal server and both providers afterward. Typical runtime is under five
+minutes on a laptop; reserve roughly 2 GB RAM for the JVM, Temporal service,
+and two provider processes.
 
 ## Verification status
 

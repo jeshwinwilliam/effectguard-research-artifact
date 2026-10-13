@@ -13,14 +13,15 @@ After the release owner makes the reviewer branch accessible, run:
 ```bash
 git clone https://github.com/jeshwinwilliam/EffectGuard.git
 cd EffectGuard
-git checkout 53fcf5e2796d4c92915ca45cf7155f980765ae4e
+git checkout p4-reviewer-artifact-v0.1
 git status --short
 ```
 
-The expected status is empty. Verify release scope before running anything:
+The expected status is empty. Confirm the checked-out revision is a root commit
+before running anything:
 
 ```bash
-git show --no-patch --format='%H%n%s' HEAD
+git rev-list --parents -n 1 HEAD
 shasum -a 256 \
   effectguard/p4/common_execution.py \
   effectguard/p4/local_provider.py \
