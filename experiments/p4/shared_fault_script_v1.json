@@ -1,0 +1,6 @@
+{
+  "scenario_id": "development-retry-after-commit-timeout",
+  "version": "p4-shared-fault-script-v1",
+  "submit_failures_before_commit": 1,
+  "lose_acknowledgement_after_commit": true
+}

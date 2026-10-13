@@ -1,0 +1,176 @@
+{
+  "benchmark_id": "p4-development-v1",
+  "kind": "development_only",
+  "authorship": "codex_authored_not_independent",
+  "description": "Deterministic development scenarios for P4 mechanism testing. These tasks are excluded from any future held-out confirmatory suite.",
+  "scenarios": [
+    {
+      "task_id": "procurement_positive_gap_success",
+      "domain": "procurement",
+      "fault": "UNKNOWN_TO_SUCCESS",
+      "claimed_positive_semantic_gap": true,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "reserve-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "reserve-b", "logical_operation_id": "reserve-b", "effect_class": "COMPENSABLE", "parents": ["reserve-a"], "conflicts_with": ["reserve-a"], "compensation": true},
+        {"action_id": "ship-b", "logical_operation_id": "ship-b", "effect_class": "REVERSIBLE", "parents": ["reserve-b"], "conflicts_with": ["reserve-a"], "compensation": true},
+        {"action_id": "tax", "logical_operation_id": "tax", "effect_class": "PURE", "parents": ["reserve-a"], "compensation": false}
+      ],
+      "expected_validity": {"reserve-b": "INVALID", "ship-b": "INVALID", "tax": "VALID"},
+      "required_invariants": ["one_active_reservation", "one_active_shipment"]
+    },
+    {
+      "task_id": "procurement_zero_gap_control",
+      "domain": "procurement",
+      "fault": "UNKNOWN_TO_SUCCESS",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "reserve-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "reserve-b", "logical_operation_id": "reserve-b-control", "effect_class": "COMPENSABLE", "parents": ["reserve-a"], "conflicts_with": ["reserve-a"], "compensation": true},
+        {"action_id": "ship-b", "logical_operation_id": "ship-b-control", "effect_class": "REVERSIBLE", "parents": ["reserve-b"], "conflicts_with": ["reserve-a"], "compensation": true}
+      ],
+      "expected_validity": {"reserve-b": "INVALID", "ship-b": "INVALID"},
+      "required_invariants": ["one_active_reservation", "one_active_shipment"]
+    },
+    {
+      "task_id": "procurement_compensation_failure",
+      "domain": "procurement",
+      "fault": "COMPENSATION_FAILURE",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "reserve-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "reserve-b", "logical_operation_id": "reserve-b-compfail", "effect_class": "COMPENSABLE", "parents": ["reserve-a"], "conflicts_with": ["reserve-a"], "compensation": true}
+      ],
+      "expected_validity": {"reserve-b": "INVALID"},
+      "required_invariants": ["one_active_reservation"],
+      "compensation_fails": true
+    },
+    {
+      "task_id": "travel_positive_gap_success",
+      "domain": "travel",
+      "fault": "UNKNOWN_TO_SUCCESS",
+      "claimed_positive_semantic_gap": true,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "flight-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "flight-b", "logical_operation_id": "flight-b", "effect_class": "COMPENSABLE", "parents": ["flight-a"], "conflicts_with": ["flight-a"], "compensation": true},
+        {"action_id": "hotel-b", "logical_operation_id": "hotel-b", "effect_class": "COMPENSABLE", "parents": ["flight-b"], "conflicts_with": ["flight-a"], "compensation": true},
+        {"action_id": "trip-cost", "logical_operation_id": "trip-cost", "effect_class": "PURE", "parents": ["flight-a"], "compensation": false}
+      ],
+      "expected_validity": {"flight-b": "INVALID", "hotel-b": "INVALID", "trip-cost": "VALID"},
+      "required_invariants": ["one_active_flight", "hotel_matches_trip"]
+    },
+    {
+      "task_id": "travel_positive_gap_failure",
+      "domain": "travel",
+      "fault": "UNKNOWN_TO_FAILURE",
+      "claimed_positive_semantic_gap": true,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "flight-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "FAILURE"},
+      "actions": [
+        {"action_id": "flight-b", "logical_operation_id": "flight-b-failure", "effect_class": "COMPENSABLE", "parents": ["flight-a"], "conflicts_with": ["flight-a"], "compensation": true},
+        {"action_id": "hotel-b", "logical_operation_id": "hotel-b-failure", "effect_class": "COMPENSABLE", "parents": ["flight-b"], "compensation": true}
+      ],
+      "expected_validity": {"flight-b": "VALID", "hotel-b": "VALID"},
+      "required_invariants": ["one_active_flight", "hotel_matches_trip"]
+    },
+    {
+      "task_id": "travel_crash_restart",
+      "domain": "travel",
+      "fault": "CRASH_RESTART",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "flight-a", "effect_class": "COMPENSABLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "flight-b", "logical_operation_id": "flight-b-restart", "effect_class": "COMPENSABLE", "parents": ["flight-a"], "conflicts_with": ["flight-a"], "compensation": true}
+      ],
+      "expected_validity": {"flight-b": "INVALID"},
+      "required_invariants": ["one_active_flight"],
+      "restart_interrupted": true
+    },
+    {
+      "task_id": "cloud_unknown_irreversible_success",
+      "domain": "cloud",
+      "fault": "UNKNOWN_IRREVERSIBLE",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "capacity-a", "effect_class": "READ", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "submit-job-b", "logical_operation_id": "submit-job-b", "effect_class": "IRREVERSIBLE", "parents": ["capacity-a"], "conflicts_with": ["capacity-a"], "compensation": false}
+      ],
+      "expected_validity": {"submit-job-b": "INVALID"},
+      "required_invariants": ["exactly_one_submitted_job"]
+    },
+    {
+      "task_id": "cloud_unknown_timeout",
+      "domain": "cloud",
+      "fault": "UNKNOWN_TIMEOUT",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": false,
+      "root_effect": {"logical_operation_id": "capacity-a", "effect_class": "READ", "initial_status": "UNKNOWN", "resolved_status": "UNKNOWN"},
+      "actions": [
+        {"action_id": "submit-job-b", "logical_operation_id": "submit-job-b-timeout", "effect_class": "IRREVERSIBLE", "parents": ["capacity-a"], "conflicts_with": ["capacity-a"], "compensation": false}
+      ],
+      "expected_validity": {"submit-job-b": "UNKNOWN"},
+      "required_invariants": ["exactly_one_submitted_job"],
+      "evidence_deadline_expired": true
+    },
+    {
+      "task_id": "cloud_duplicate_delivery",
+      "domain": "cloud",
+      "fault": "DUPLICATE_DELIVERY",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "capacity-a", "effect_class": "READ", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "submit-job-b", "logical_operation_id": "submit-job-b-duplicate", "effect_class": "IRREVERSIBLE", "parents": ["capacity-a"], "conflicts_with": ["capacity-a"], "compensation": false}
+      ],
+      "expected_validity": {"submit-job-b": "INVALID"},
+      "required_invariants": ["exactly_one_submitted_job"],
+      "duplicate_delivery": true
+    },
+    {
+      "task_id": "fulfillment_positive_gap_success",
+      "domain": "fulfillment",
+      "fault": "UNKNOWN_TO_SUCCESS",
+      "claimed_positive_semantic_gap": true,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "payment-a", "effect_class": "IRREVERSIBLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "charge-b", "logical_operation_id": "charge-b", "effect_class": "COMPENSABLE", "parents": ["payment-a"], "conflicts_with": ["payment-a"], "compensation": true},
+        {"action_id": "receipt-render", "logical_operation_id": "receipt-render", "effect_class": "PURE", "parents": ["payment-a"], "compensation": false}
+      ],
+      "expected_validity": {"charge-b": "INVALID", "receipt-render": "VALID"},
+      "required_invariants": ["exactly_one_charge", "receipt_matches_charge"]
+    },
+    {
+      "task_id": "fulfillment_zero_gap_control",
+      "domain": "fulfillment",
+      "fault": "UNKNOWN_TO_SUCCESS",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "payment-a", "effect_class": "IRREVERSIBLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "charge-b", "logical_operation_id": "charge-b-control", "effect_class": "COMPENSABLE", "parents": ["payment-a"], "conflicts_with": ["payment-a"], "compensation": true}
+      ],
+      "expected_validity": {"charge-b": "INVALID"},
+      "required_invariants": ["exactly_one_charge"]
+    },
+    {
+      "task_id": "fulfillment_duplicate_recovery",
+      "domain": "fulfillment",
+      "fault": "DUPLICATE_DELIVERY",
+      "claimed_positive_semantic_gap": false,
+      "semantic_gap_applicable": true,
+      "root_effect": {"logical_operation_id": "payment-a", "effect_class": "IRREVERSIBLE", "initial_status": "UNKNOWN", "resolved_status": "SUCCESS"},
+      "actions": [
+        {"action_id": "charge-b", "logical_operation_id": "charge-b-replay", "effect_class": "COMPENSABLE", "parents": ["payment-a"], "conflicts_with": ["payment-a"], "compensation": true}
+      ],
+      "expected_validity": {"charge-b": "INVALID"},
+      "required_invariants": ["exactly_one_charge"],
+      "duplicate_delivery": true
+    }
+  ]
+}

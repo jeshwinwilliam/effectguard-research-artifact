@@ -1,0 +1,37 @@
+{
+  "classification": "development-only",
+  "source_commit": "b72be6e7fa7cdb9620a25d61323e2bc61085f0dd",
+  "witness": {
+    "task_id": "travel_positive_gap_success",
+    "fault_script_version": "p4-shared-fault-script-v1",
+    "graph_sha256": "caefd129b255701ca8087c06610dca85749419d629bfacdadfb3fd17e5756c12",
+    "logical_operation_id": "clean-clone-release:travel_positive_gap_success:flight-a",
+    "effectguard": {
+      "terminal_status": "RECOVERED",
+      "retry_attempts": 1,
+      "provider_submissions": 2,
+      "provider_verifications": 2,
+      "actual_descendant_effects": 1,
+      "evaluator_valid": true
+    },
+    "temporal": {
+      "terminal_status": "RECOVERED",
+      "retry_attempts": 1,
+      "provider_submissions": 2,
+      "provider_verifications": 2,
+      "actual_descendant_effects": 1,
+      "evaluator_valid": true
+    }
+  },
+  "artifacts": {
+    "witness_sha256": "3f70987a4ccdc881e7356b6bb72d41551708a9b99a3b77a5d4401ae7ebe89a1b",
+    "effectguard_provider_audit_sha256": "b48b8209a3eee5d6cb91bb97099f7582cac21ad8412a2f64dce38326d4dc056f",
+    "temporal_provider_audit_sha256": "d32ef3b2112f5647854b377b27a923bfb2091e2979f9c6ec2733d2423d7139dc"
+  },
+  "tests": {
+    "python_full_suite": {"passed": 197, "failed": 0},
+    "provider_audit_and_common_harness": {"passed": 10, "failed": 0},
+    "java_default_suite": {"passed": 4, "failed": 0, "skipped": 5},
+    "java_explicit_service_tests": {"passed": 2, "failed": 0, "skipped": 0}
+  }
+}
